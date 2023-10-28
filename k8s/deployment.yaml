@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redisclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redisclient
+  template:
+    metadata:
+      labels:
+        app: redisclient
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": windows
+      containers:
+        - name: redisclient
+          image: <OVERRIDE>
+          command: ["dotnet", "AzureRedisConsoleApp.dll"]
+          args: ["OVERRIDE"]
